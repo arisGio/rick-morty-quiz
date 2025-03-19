@@ -3,6 +3,7 @@ import { QUIZ_LENGTH } from "@/constants";
 import {
   selectCurrentQuestion,
   selectCurrentQuestionIndex,
+  selectScore,
 } from "@/redux/selectors";
 import { nextQuestion } from "@/redux/slice";
 import { FormEvent, useState } from "react";
@@ -10,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function Question() {
   const dispatch = useDispatch();
+  const score = useSelector(selectScore);
   const currentQuestion = useSelector(selectCurrentQuestion);
   const currentQuestionIndex = useSelector(selectCurrentQuestionIndex);
   const { image, correct, options } = currentQuestion;
@@ -30,6 +32,7 @@ function Question() {
 
   return (
     <div>
+      <h1>Current score: {score}%</h1>
       <div>Question {currentQuestionIndex}: Who is the shown character?</div>
       <img src={image} alt={image} />
       <form onSubmit={handleSubmit}>
@@ -42,7 +45,6 @@ function Question() {
               value={option}
               checked={selected === option}
               onChange={() => {
-                console.log(correct);
                 setSelected(option);
               }}
             />
