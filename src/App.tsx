@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { Moon, Sun } from "lucide-react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import { QUIZ_LENGTH } from "./constants";
@@ -11,6 +13,7 @@ import Result from "./ui-react/Result";
 function App() {
   const dispatch = useDispatch<AppDispatch>();
   const currentQuestionIndex = useSelector(selectCurrentQuestionIndex);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   return (
     <>
@@ -27,6 +30,14 @@ function App() {
           Play Now
         </Button>
       )}
+      <Button
+        onClick={() => {
+          document.body.classList.toggle("dark");
+          setIsDarkMode((prev) => !prev);
+        }}
+      >
+        {isDarkMode ? <Moon /> : <Sun />}
+      </Button>
     </>
   );
 }
