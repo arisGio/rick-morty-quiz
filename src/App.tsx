@@ -6,6 +6,7 @@ import { selectCurrentQuestionIndex } from "./redux/selectors";
 import { AppDispatch } from "./redux/store";
 import { fetchCharacters } from "./redux/thunk";
 import Question from "./ui-react/Question";
+import Result from "./ui-react/Result";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -16,6 +17,7 @@ function App() {
       {currentQuestionIndex && currentQuestionIndex < QUIZ_LENGTH + 1 && (
         <Question />
       )}
+      {currentQuestionIndex === QUIZ_LENGTH + 1 && <Result />}
       {!currentQuestionIndex && (
         <Button
           onClick={() => {
